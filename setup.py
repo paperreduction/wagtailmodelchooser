@@ -22,7 +22,7 @@ setup(
 
     install_requires=[
         'django>=2.0',
-        'wagtail>=2.0b1'
+        'wagtail>=1.7'
     ],
     zip_safe=False,
     license='BSD License',
