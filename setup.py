@@ -20,7 +20,10 @@ setup(
     author_email='tim@takeflight.com.au',
     url='https://github.com/takeflight/wagtailmodelchooser/',
 
-    install_requires=['wagtail>=1.7'],
+    install_requires=[
+        'django>=2.0',
+        'wagtail>=2.0'
+    ],
     zip_safe=False,
     license='BSD License',
 
