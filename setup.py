@@ -21,8 +21,7 @@ setup(
     url='https://github.com/takeflight/wagtailmodelchooser/',
 
     install_requires=[
-        'django>=2.0',
-        'wagtail>=1.7'
+        'wagtail>=2.0',
     ],
     zip_safe=False,
     license='BSD License',
