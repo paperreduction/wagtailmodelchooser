@@ -1,7 +1,7 @@
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from wagtail.utils.decorators import cached_classmethod
-from wagtail.wagtailadmin.edit_handlers import BaseChooserPanel
+from wagtail.admin.edit_handlers import BaseChooserPanel
 
 from .widgets import AdminModelChooser
 
@@ -18,7 +18,7 @@ class BaseModelChooserPanel(BaseChooserPanel):
 
     @cached_classmethod
     def target_model(cls):
-        return cls.model._meta.get_field(cls.field_name).rel.model
+        return cls.model._meta.get_field(cls.field_name).remote_field.model
 
     def render_as_field(self):
         instance_obj = self.get_chosen_item()
