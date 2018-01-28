@@ -13,8 +13,12 @@ class BaseModelChooserPanel(BaseChooserPanel):
 
     @classmethod
     def widget_overrides(cls):
-        return {cls.field_name: AdminModelChooser(
-            model=cls.target_model(), filter_name=cls.filter_name)}
+        if hasattr(cls, 'widget'):
+            return {cls.field_name: cls.widget(
+                model=cls.target_model(), filter_name=cls.filter_name)}
+        else:
+            return {cls.field_name: AdminModelChooser(
+                model=cls.target_model(), filter_name=cls.filter_name)}
 
     @cached_classmethod
     def target_model(cls):
@@ -29,9 +33,11 @@ class BaseModelChooserPanel(BaseChooserPanel):
 
 
 class ModelChooserPanel(object):
-    def __init__(self, field_name, filter_name=None):
+    def __init__(self, field_name, filter_name=None, widget=None):
         self.field_name = field_name
         self.filter_name = filter_name
+        self.widget = widget
+
         if filter_name is not None:
             FILTERS[filter_name] = filter
 
@@ -40,4 +46,5 @@ class ModelChooserPanel(object):
             'model': model,
             'field_name': self.field_name,
             'filter_name': self.filter_name,
+            'widget': self.widget,
         })
