@@ -9,9 +9,14 @@ from wagtail.admin.widgets import AdminChooser
 class AdminModelChooser(AdminChooser):
     show_edit_link = False
 
-    def __init__(self, model, filter_name=None, **kwargs):
-        self.target_model = model
-        name = self.target_model._meta.verbose_name
+    def __init__(self, target_model=None, filter_name=None, **kwargs):
+        self.target_model = target_model
+
+        if self.target_model:
+            name = self.target_model._meta.verbose_name
+        else:
+            name = 'Model'
+
         self.choose_one_text = _('Choose %s') % name
         self.choose_another_text = _('Choose another %s') % name
         self.link_to_chosen_text = _('Edit this %s') % name
